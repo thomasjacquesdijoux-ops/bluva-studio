@@ -4,12 +4,28 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = "AVARA by BLUVA crée des sites vitrines et e-commerce modernes, rapides et faciles à gérer."
+  description = "AVARA by BLUVA crée des sites vitrines et e-commerce modernes, rapides et faciles à gérer pour indépendants et petites entreprises.",
+  image = "/images/logo-avara.png",
+  noindex = false
 } = Astro.props;
+
+const siteURL = Astro.site ?? new URL("https://avarastudio.be");
+
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  siteURL
+);
+
+const socialImageURL = new URL(
+  image,
+  siteURL
+);
 ---
 
 <!doctype html>
@@ -22,9 +38,16 @@ const {
       content="width=device-width, initial-scale=1.0"
     />
 
+    <title>{title}</title>
+
     <meta
       name="description"
       content={description}
+    />
+
+    <meta
+      name="robots"
+      content={noindex ? "noindex, nofollow" : "index, follow"}
     />
 
     <meta
@@ -32,6 +55,19 @@ const {
       content="#f7f7f4"
     />
 
+    <!-- Canonical -->
+    <link
+      rel="canonical"
+      href={canonicalURL}
+    />
+
+    <!-- Sitemap -->
+    <link
+      rel="sitemap"
+      href="/sitemap-index.xml"
+    />
+
+    <!-- Favicon -->
     <link
       rel="icon"
       type="image/png"
@@ -43,7 +79,67 @@ const {
       href="/images/favicon-avara.png"
     />
 
-    <title>{title}</title>
+    <!-- Open Graph -->
+    <meta
+      property="og:type"
+      content="website"
+    />
+
+    <meta
+      property="og:site_name"
+      content="AVARA by BLUVA"
+    />
+
+    <meta
+      property="og:locale"
+      content="fr_BE"
+    />
+
+    <meta
+      property="og:title"
+      content={title}
+    />
+
+    <meta
+      property="og:description"
+      content={description}
+    />
+
+    <meta
+      property="og:url"
+      content={canonicalURL}
+    />
+
+    <meta
+      property="og:image"
+      content={socialImageURL}
+    />
+
+    <meta
+      property="og:image:alt"
+      content="AVARA by BLUVA"
+    />
+
+    <!-- X / Twitter -->
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+
+    <meta
+      name="twitter:title"
+      content={title}
+    />
+
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+
+    <meta
+      name="twitter:image"
+      content={socialImageURL}
+    />
   </head>
 
   <body>
