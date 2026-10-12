@@ -71,6 +71,24 @@ select {
   gap: 6px;
 }
 
+.brand-logo-image {
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo-image img {
+  display: block;
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .brand-logo-image img {
+    width: 130px;
+  }
+}
+
 .brand-main {
   font-family: "Manrope", sans-serif;
   font-size: 1.45rem;
