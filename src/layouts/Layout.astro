@@ -11,8 +11,8 @@ interface Props {
 const {
   title,
   description = "AVARA by BLUVA crée des sites vitrines et e-commerce modernes, rapides et faciles à gérer pour indépendants et petites entreprises.",
-  image = "/images/og-avara.png",,
-  noindex = false
+  image = "/images/og-avara.png",
+  noindex = false,
 } = Astro.props;
 
 const siteURL = Astro.site ?? new URL("https://avarastudio.be");
@@ -20,12 +20,12 @@ const siteURL = Astro.site ?? new URL("https://avarastudio.be");
 const canonicalURL = new URL(
   Astro.url.pathname,
   siteURL
-);
+).toString();
 
 const socialImageURL = new URL(
   image,
   siteURL
-);
+).toString();
 ---
 
 <!doctype html>
@@ -117,7 +117,7 @@ const socialImageURL = new URL(
 
     <meta
       property="og:image:alt"
-      content="AVARA by BLUVA"
+      content="AVARA by BLUVA — Création de sites vitrines et e-commerce"
     />
 
     <!-- X / Twitter -->
