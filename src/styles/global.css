@@ -2470,3 +2470,16 @@ footer {
     flex-wrap: wrap;
   }
 }
+
+.project-link {
+  display: inline-flex;
+  margin-top: 14px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.project-link:hover {
+  transform: translateX(4px);
+}
