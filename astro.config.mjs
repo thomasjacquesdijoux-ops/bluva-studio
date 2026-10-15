@@ -7,7 +7,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) =>
-        page !== "https://avarastudio.be/merci/",
+        page !== "https://avarastudio.be/merci/" &&
+        page !== "https://avarastudio.be/en/thank-you/",
     }),
   ],
 });

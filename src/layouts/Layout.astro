@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = "AVARA by BLUVA crée des sites vitrines et e-commerce modernes, rapides et faciles à gérer pour indépendants et petites entreprises.",
+  description = "AVARA by BLUVA creates modern, fast and easy-to-manage websites for freelancers and small businesses.",
   image = "/images/og-avara.png",
   noindex = false,
 } = Astro.props;
@@ -26,10 +26,55 @@ const socialImageURL = new URL(
   image,
   siteURL
 ).toString();
+
+const rawPath = Astro.url.pathname;
+const path =
+  rawPath === "/"
+    ? "/"
+    : rawPath.endsWith("/")
+      ? rawPath
+      : `${rawPath}/`;
+
+const languageMap: Record<string, string> = {
+  "/": "/en/",
+  "/restaurants/": "/en/restaurants/",
+  "/merci/": "/en/thank-you/",
+  "/mentions-legales/": "/en/legal-notice/",
+  "/confidentialite/": "/en/privacy/",
+  "/en/": "/",
+  "/en/restaurants/": "/restaurants/",
+  "/en/thank-you/": "/merci/",
+  "/en/legal-notice/": "/mentions-legales/",
+  "/en/privacy/": "/confidentialite/",
+};
+
+const isEnglish = path.startsWith("/en/");
+const lang = isEnglish ? "en" : "fr";
+const ogLocale = isEnglish ? "en_BE" : "fr_BE";
+
+const alternatePath = languageMap[path];
+const alternateURL = alternatePath
+  ? new URL(alternatePath, siteURL).toString()
+  : null;
+
+const frenchPath = isEnglish ? alternatePath : path;
+const englishPath = isEnglish ? path : alternatePath;
+
+const frenchURL = frenchPath
+  ? new URL(frenchPath, siteURL).toString()
+  : null;
+
+const englishURL = englishPath
+  ? new URL(englishPath, siteURL).toString()
+  : null;
+
+const socialImageAlt = isEnglish
+  ? "AVARA by BLUVA — Business websites and e-commerce"
+  : "AVARA by BLUVA — Création de sites vitrines et e-commerce";
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
 
@@ -55,19 +100,26 @@ const socialImageURL = new URL(
       content="#f7f7f4"
     />
 
-    <!-- Canonical -->
     <link
       rel="canonical"
       href={canonicalURL}
     />
 
-    <!-- Sitemap -->
+    {
+      frenchURL && englishURL && (
+        <>
+          <link rel="alternate" hreflang="fr-BE" href={frenchURL} />
+          <link rel="alternate" hreflang="en" href={englishURL} />
+          <link rel="alternate" hreflang="x-default" href={frenchURL} />
+        </>
+      )
+    }
+
     <link
       rel="sitemap"
       href="/sitemap-index.xml"
     />
 
-    <!-- Favicon -->
     <link
       rel="icon"
       type="image/png"
@@ -79,70 +131,95 @@ const socialImageURL = new URL(
       href="/images/favicon-avara.png"
     />
 
-    <!-- Open Graph -->
-    <meta
-      property="og:type"
-      content="website"
-    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AVARA by BLUVA" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:alt" content={socialImageAlt} />
 
-    <meta
-      property="og:site_name"
-      content="AVARA by BLUVA"
-    />
-
-    <meta
-      property="og:locale"
-      content="fr_BE"
-    />
-
-    <meta
-      property="og:title"
-      content={title}
-    />
-
-    <meta
-      property="og:description"
-      content={description}
-    />
-
-    <meta
-      property="og:url"
-      content={canonicalURL}
-    />
-
-    <meta
-      property="og:image"
-      content={socialImageURL}
-    />
-
-    <meta
-      property="og:image:alt"
-      content="AVARA by BLUVA — Création de sites vitrines et e-commerce"
-    />
-
-    <!-- X / Twitter -->
-    <meta
-      name="twitter:card"
-      content="summary_large_image"
-    />
-
-    <meta
-      name="twitter:title"
-      content={title}
-    />
-
-    <meta
-      name="twitter:description"
-      content={description}
-    />
-
-    <meta
-      name="twitter:image"
-      content={socialImageURL}
-    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
   </head>
 
   <body>
+    {
+      alternatePath && (
+        <div class="language-bar" aria-label={isEnglish ? "Language" : "Langue"}>
+          <div class="language-bar-inner">
+            <a
+              href={isEnglish ? alternatePath : path}
+              class={!isEnglish ? "active" : ""}
+              lang="fr"
+              hreflang="fr-BE"
+            >
+              FR
+            </a>
+
+            <span aria-hidden="true">/</span>
+
+            <a
+              href={isEnglish ? path : alternatePath}
+              class={isEnglish ? "active" : ""}
+              lang="en"
+              hreflang="en"
+            >
+              EN
+            </a>
+          </div>
+        </div>
+      )
+    }
+
     <slot />
+
+    <style is:global>
+      .language-bar {
+        position: relative;
+        z-index: 1000;
+        height: 30px;
+        border-bottom: 1px solid rgba(23, 23, 23, 0.06);
+        background: #f7f7f4;
+      }
+
+      .language-bar-inner {
+        width: min(calc(100% - 40px), 1180px);
+        height: 100%;
+        margin-inline: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 7px;
+        color: #8a8a84;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+      }
+
+      .language-bar-inner a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .language-bar-inner a:hover,
+      .language-bar-inner a.active {
+        color: #171717;
+      }
+
+      .language-bar-inner a.active {
+        font-weight: 800;
+      }
+
+      @media (max-width: 600px) {
+        .language-bar-inner {
+          width: min(calc(100% - 30px), 1180px);
+        }
+      }
+    </style>
   </body>
 </html>
