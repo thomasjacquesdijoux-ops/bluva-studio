@@ -1,0 +1,368 @@
+---
+import "../styles/automation.css";
+
+interface Props {
+  lang?: "fr" | "en";
+}
+
+const { lang = "fr" } = Astro.props;
+const en = lang === "en";
+
+const homeUrl = en ? "/en/" : "/";
+const privacyUrl = en ? "/en/privacy/" : "/confidentialite/";
+const thankYouUrl = en ? "/en/thank-you/" : "/merci/";
+
+const examples = en
+  ? [
+      ["01", "Connect software", "Synchronise data between accounting tools, CRMs, payment providers, spreadsheets, databases or internal systems."],
+      ["02", "Process files and data", "Import, validate, transform, classify or consolidate CSV, Excel, JSON, API or other structured data automatically."],
+      ["03", "Generate documents and outputs", "Create files, reports, exports, notifications or documents automatically from business data."],
+      ["04", "Automate internal workflows", "Trigger actions when a status changes, a file arrives, a payment is received or a condition is met."],
+      ["05", "Checks and reconciliation", "Compare information from several sources and highlight discrepancies that need human attention."],
+      ["06", "Dashboards and internal tools", "Build lightweight tools that centralise the information your team needs to make decisions or act."],
+    ]
+  : [
+      ["01", "Connecter des logiciels", "Synchroniser des données entre logiciels comptables, CRM, moyens de paiement, tableurs, bases de données ou outils internes."],
+      ["02", "Traiter des fichiers et données", "Importer, contrôler, transformer, classer ou consolider automatiquement des données CSV, Excel, JSON, API ou autres formats structurés."],
+      ["03", "Générer des documents et résultats", "Créer automatiquement des fichiers, rapports, exports, notifications ou documents à partir des données de l’entreprise."],
+      ["04", "Automatiser des workflows internes", "Déclencher des actions lorsqu’un statut change, qu’un fichier arrive, qu’un paiement est reçu ou qu’une condition est remplie."],
+      ["05", "Contrôles et rapprochements", "Comparer les informations provenant de plusieurs sources et mettre en évidence les écarts qui nécessitent une intervention humaine."],
+      ["06", "Tableaux de bord et outils internes", "Créer des outils légers qui centralisent les informations nécessaires à votre équipe pour décider ou agir."],
+    ];
+
+const steps = en
+  ? [
+      ["01", "Understand the current process", "We map what happens today, who does what, which tools are involved and where time is lost."],
+      ["02", "Identify the useful automation", "Not everything should be automated. We focus on the repetitive steps where automation genuinely creates value."],
+      ["03", "Design the solution", "We define the data flows, integrations, controls, exceptions and the role that remains with your team."],
+      ["04", "Build and test", "The solution is developed and tested on realistic scenarios before it is introduced into the workflow."],
+      ["05", "Deploy and improve", "After deployment, the automation can evolve as your process, volumes or software change."],
+    ]
+  : [
+      ["01", "Comprendre le processus actuel", "Nous cartographions ce qui se passe aujourd’hui, qui fait quoi, quels outils sont utilisés et où du temps est perdu."],
+      ["02", "Identifier l’automatisation utile", "Tout ne doit pas être automatisé. Nous ciblons les étapes répétitives pour lesquelles l’automatisation apporte une vraie valeur."],
+      ["03", "Concevoir la solution", "Nous définissons les flux de données, intégrations, contrôles, exceptions et ce qui doit rester sous validation humaine."],
+      ["04", "Développer et tester", "La solution est développée puis testée sur des scénarios réalistes avant son introduction dans le processus."],
+      ["05", "Déployer et faire évoluer", "Après le déploiement, l’automatisation peut évoluer avec vos processus, volumes ou logiciels."],
+    ];
+---
+
+<header class="automation-header">
+  <div class="automation-container automation-nav">
+    <a href={homeUrl} class="automation-logo" aria-label="AVARA by BLUVA">
+      <img src="/images/logo-avara.png" alt="AVARA by BLUVA" />
+    </a>
+
+    <nav>
+      <a href="#examples">{en ? "Examples" : "Exemples"}</a>
+      <a href="#approach">{en ? "Approach" : "Approche"}</a>
+      <a href="#process">{en ? "Process" : "Méthode"}</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#contact" class="automation-button-small">
+      {en ? "Discuss my process" : "Parler de mon processus"}
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="automation-hero">
+    <div class="automation-glow automation-glow-one"></div>
+    <div class="automation-glow automation-glow-two"></div>
+
+    <div class="automation-container automation-hero-grid">
+      <div>
+        <div class="automation-badge">
+          {en ? "Custom business automation" : "Automatisation métier sur mesure"}
+        </div>
+
+        <h1>
+          {en ? "Automate the work" : "Automatisez ce qui"}
+          <span>{en ? "that slows you down." : "vous fait perdre du temps."}</span>
+        </h1>
+
+        <p class="automation-hero-text">
+          {en
+            ? "AVARA analyses the way your business currently works and develops a solution around your real process, tools and constraints."
+            : "AVARA analyse le fonctionnement actuel de votre entreprise et développe une solution autour de votre processus réel, de vos outils et de vos contraintes."}
+        </p>
+
+        <div class="automation-actions">
+          <a href="#contact" class="automation-button-primary">
+            {en ? "Describe my process" : "Décrire mon processus"} <span>→</span>
+          </a>
+          <a href="#examples" class="automation-button-secondary">
+            {en ? "See examples" : "Voir des exemples"}
+          </a>
+        </div>
+
+        <div class="automation-proof">
+          <div>
+            <strong>{en ? "Process first" : "Process d’abord"}</strong>
+            <span>{en ? "We understand before we build" : "Nous comprenons avant de développer"}</span>
+          </div>
+          <div>
+            <strong>{en ? "Custom quote" : "Sur devis"}</strong>
+            <span>{en ? "Based on the real scope" : "Selon le périmètre réel"}</span>
+          </div>
+          <div>
+            <strong>{en ? "Human control" : "Contrôle humain"}</strong>
+            <span>{en ? "Exceptions can stay reviewable" : "Les exceptions peuvent rester validables"}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="automation-diagram">
+        <div class="automation-diagram-label">{en ? "Example workflow" : "Exemple de workflow"}</div>
+
+        <div class="automation-node source">
+          <span>01</span>
+          <strong>{en ? "Source" : "Source"}</strong>
+          <small>{en ? "API · files · database" : "API · fichiers · base de données"}</small>
+        </div>
+
+        <div class="automation-connector">↓</div>
+
+        <div class="automation-node logic">
+          <span>02</span>
+          <strong>{en ? "Business rules" : "Règles métier"}</strong>
+          <small>{en ? "Validate · transform · match" : "Contrôler · transformer · rapprocher"}</small>
+        </div>
+
+        <div class="automation-connector">↓</div>
+
+        <div class="automation-node output">
+          <span>03</span>
+          <strong>{en ? "Action / output" : "Action / résultat"}</strong>
+          <small>{en ? "Software · document · alert" : "Logiciel · document · alerte"}</small>
+        </div>
+
+        <div class="automation-review">
+          <span>✓</span>
+          <div>
+            <strong>{en ? "Exceptions remain visible" : "Les exceptions restent visibles"}</strong>
+            <small>{en ? "Automation does not mean losing control." : "Automatiser ne veut pas dire perdre le contrôle."}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="automation-statement">
+    <div class="automation-container statement-grid">
+      <div>
+        <span>{en ? "The principle" : "Le principe"}</span>
+        <h2>
+          {en ? "A solution built around your business — not the other way around." : "Une solution construite autour de votre entreprise — pas l’inverse."}
+        </h2>
+      </div>
+      <p>
+        {en
+          ? "The objective is not to add technology for the sake of it. It is to remove unnecessary manual work while preserving the controls, decisions and exceptions that still need people."
+          : "L’objectif n’est pas d’ajouter de la technologie pour le principe. Il s’agit de supprimer le travail manuel inutile tout en conservant les contrôles, décisions et exceptions qui nécessitent encore une intervention humaine."}
+      </p>
+    </div>
+  </section>
+
+  <section id="examples" class="automation-section examples-section">
+    <div class="automation-container">
+      <div class="automation-section-heading">
+        <div>
+          <p class="automation-eyebrow">{en ? "Examples" : "Exemples"}</p>
+          <h2>{en ? "What can be automated?" : "Que peut-on automatiser ?"}</h2>
+        </div>
+        <p>
+          {en
+            ? "The best candidates are usually repetitive tasks involving structured data, recurring rules or information that must move between systems."
+            : "Les meilleurs candidats sont généralement les tâches répétitives qui impliquent des données structurées, des règles récurrentes ou des informations qui doivent circuler entre plusieurs systèmes."}
+        </p>
+      </div>
+
+      <div class="automation-examples-grid">
+        {examples.map(([number, title, text]) => (
+          <article class="automation-example-card">
+            <span>{number}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" class="automation-section approach-section">
+    <div class="automation-container approach-card">
+      <div class="approach-copy">
+        <p class="automation-eyebrow">{en ? "Practical approach" : "Approche pragmatique"}</p>
+        <h2>{en ? "We automate the right part of the process." : "Nous automatisons la bonne partie du processus."}</h2>
+        <p>
+          {en
+            ? "A reliable automation should know what it can handle automatically and what should be sent to a person for review."
+            : "Une automatisation fiable doit savoir ce qu’elle peut traiter automatiquement et ce qui doit être envoyé à une personne pour validation."}
+        </p>
+      </div>
+
+      <div class="approach-columns">
+        <div class="approach-column good">
+          <span>✓</span>
+          <strong>{en ? "Good candidates" : "Bons candidats"}</strong>
+          <ul>
+            <li>{en ? "Recurring data entry" : "Encodages récurrents"}</li>
+            <li>{en ? "File transformations" : "Transformations de fichiers"}</li>
+            <li>{en ? "Software synchronisation" : "Synchronisations logicielles"}</li>
+            <li>{en ? "Rule-based checks" : "Contrôles basés sur des règles"}</li>
+            <li>{en ? "Scheduled reports or exports" : "Rapports ou exports planifiés"}</li>
+          </ul>
+        </div>
+
+        <div class="approach-column review">
+          <span>!</span>
+          <strong>{en ? "Keep human review when needed" : "Garder une validation humaine si nécessaire"}</strong>
+          <ul>
+            <li>{en ? "Ambiguous cases" : "Cas ambigus"}</li>
+            <li>{en ? "High-impact decisions" : "Décisions à fort impact"}</li>
+            <li>{en ? "Incomplete source data" : "Données sources incomplètes"}</li>
+            <li>{en ? "Exceptions outside known rules" : "Exceptions hors règles connues"}</li>
+            <li>{en ? "Sensitive business actions" : "Actions métier sensibles"}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="automation-section process-automation-section">
+    <div class="automation-container">
+      <div class="automation-section-heading">
+        <div>
+          <p class="automation-eyebrow">{en ? "Method" : "Méthode"}</p>
+          <h2>{en ? "From a manual process to a working automation." : "D’un processus manuel à une automatisation opérationnelle."}</h2>
+        </div>
+        <p>
+          {en
+            ? "The project is scoped before development so the expected result, responsibilities and exceptions are clear."
+            : "Le projet est cadré avant le développement afin que le résultat attendu, les responsabilités et les exceptions soient clairs."}
+        </p>
+      </div>
+
+      <div class="automation-process-grid">
+        {steps.map(([number, title, text]) => (
+          <article>
+            <span>{number}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="automation-section pricing-automation-section">
+    <div class="automation-container automation-pricing-card">
+      <div>
+        <p class="automation-eyebrow">{en ? "Pricing" : "Tarification"}</p>
+        <h2>{en ? "Automation projects are quoted after understanding the process." : "Les projets d’automatisation sont chiffrés après compréhension du processus."}</h2>
+      </div>
+      <div>
+        <p>
+          {en
+            ? "Pricing depends on the number of systems involved, the quality and accessibility of the data, the business rules, the required controls and the level of deployment."
+            : "Le tarif dépend du nombre de systèmes concernés, de la qualité et de l’accessibilité des données, des règles métier, des contrôles nécessaires et du niveau de déploiement."}
+        </p>
+        <strong>{en ? "Custom quote" : "Sur devis"}</strong>
+        <small>{en ? "Scope and price confirmed before development." : "Périmètre et prix confirmés avant développement."}</small>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="automation-section automation-contact">
+    <div class="automation-container automation-contact-grid">
+      <div>
+        <p class="automation-eyebrow light">{en ? "Your process" : "Votre processus"}</p>
+        <h2>{en ? "What task would you like to stop doing manually?" : "Quelle tâche aimeriez-vous ne plus devoir faire manuellement ?"}</h2>
+        <p>
+          {en
+            ? "Describe what happens today, the tools involved and where the repetitive work is. A first message is enough to see whether automation makes sense."
+            : "Décrivez ce qui se passe aujourd’hui, les outils concernés et où se trouve le travail répétitif. Un premier message suffit pour voir si une automatisation est pertinente."}
+        </p>
+
+        <div class="automation-contact-note">
+          <strong>{en ? "Please do not send passwords, API keys or sensitive client data." : "N’envoyez pas de mots de passe, clés API ou données sensibles de clients."}</strong>
+          <span>{en ? "A first discussion only needs a description of the process." : "Une première discussion nécessite uniquement une description du processus."}</span>
+        </div>
+      </div>
+
+      <form
+        name="demande-projet"
+        method="POST"
+        action={thankYouUrl}
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        class="automation-form"
+      >
+        <input type="hidden" name="form-name" value="demande-projet" />
+        <input type="hidden" name="project-type" value="automatisation" />
+
+        <p class="automation-hidden">
+          <label>{en ? "Do not fill in:" : "Ne pas remplir :"} <input name="bot-field" /></label>
+        </p>
+
+        <div class="automation-form-row">
+          <label>
+            <span>{en ? "Name *" : "Nom *"}</span>
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+
+          <label>
+            <span>{en ? "Company" : "Entreprise"}</span>
+            <input type="text" name="company" autocomplete="organization" />
+          </label>
+        </div>
+
+        <div class="automation-form-row">
+          <label>
+            <span>Email *</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+
+          <label>
+            <span>{en ? "Phone" : "Téléphone"}</span>
+            <input type="tel" name="phone" autocomplete="tel" />
+          </label>
+        </div>
+
+        <label>
+          <span>{en ? "Describe the process *" : "Décrivez le processus *"}</span>
+          <textarea
+            name="message"
+            rows="8"
+            placeholder={en ? "What do you do manually today? Which tools are involved? How often does it happen? What result would you like to obtain?" : "Que faites-vous manuellement aujourd’hui ? Quels outils sont concernés ? À quelle fréquence ? Quel résultat souhaiteriez-vous obtenir ?"}
+            required
+          ></textarea>
+        </label>
+
+        <label class="automation-consent">
+          <input type="checkbox" name="privacy-acknowledgement" value="yes" required />
+          <span>
+            {en ? "I have read the " : "J’ai pris connaissance de la "}
+            <a href={privacyUrl} target="_blank">{en ? "privacy policy" : "politique de confidentialité"}</a>.
+          </span>
+        </label>
+
+        <button type="submit" class="automation-button-primary automation-submit">
+          {en ? "Send my process" : "Envoyer mon processus"} <span>→</span>
+        </button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="automation-footer">
+  <div class="automation-container automation-footer-inner">
+    <a href={homeUrl} class="automation-footer-brand">
+      <span>AVARA</span><small>by BLUVA</small>
+    </a>
+    <p>{en ? "Web development & business automation · Charleroi, Wallonia." : "Création de sites web & automatisation métier · Charleroi, Wallonie."}</p>
+    <a href={homeUrl}>{en ? "Back to AVARA" : "Retour à AVARA"}</a>
+  </div>
+</footer>

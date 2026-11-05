@@ -1,0 +1,759 @@
+/* AVARA — Automation landing page */
+
+.automation-container {
+  width: min(calc(100% - 40px), 1180px);
+  margin-inline: auto;
+}
+
+.automation-header {
+  position: relative;
+  z-index: 20;
+  padding: 20px 0;
+  background: #f7f7f4;
+}
+
+.automation-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.automation-logo img {
+  display: block;
+  width: 145px;
+}
+
+.automation-nav nav {
+  display: flex;
+  gap: 28px;
+  color: #686868;
+  font-size: 0.86rem;
+}
+
+.automation-nav nav a:hover {
+  color: #171717;
+}
+
+.automation-button-small,
+.automation-button-primary,
+.automation-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  font-weight: 650;
+}
+
+.automation-button-small {
+  min-height: 42px;
+  padding: 0 18px;
+  background: #171717;
+  color: white;
+  font-size: 0.8rem;
+}
+
+.automation-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 95px 0 115px;
+  background: #f7f7f4;
+}
+
+.automation-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.automation-glow-one {
+  top: -100px;
+  left: -120px;
+  width: 420px;
+  height: 420px;
+  background: rgba(109, 93, 252, 0.11);
+}
+
+.automation-glow-two {
+  right: -120px;
+  bottom: -150px;
+  width: 460px;
+  height: 460px;
+  background: rgba(150, 214, 190, 0.14);
+}
+
+.automation-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 75px;
+  align-items: center;
+}
+
+.automation-badge {
+  display: inline-flex;
+  padding: 8px 13px;
+  border: 1px solid rgba(23, 23, 23, 0.09);
+  border-radius: 999px;
+  background: white;
+  color: #6d5dfc;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.automation-hero h1 {
+  margin-top: 26px;
+  max-width: 740px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(3.6rem, 6vw, 6.2rem);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+}
+
+.automation-hero h1 span {
+  display: block;
+  color: #6d5dfc;
+}
+
+.automation-hero-text {
+  max-width: 650px;
+  margin-top: 28px;
+  color: #686868;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.automation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.automation-button-primary {
+  min-height: 52px;
+  padding: 0 23px;
+  background: #171717;
+  color: white;
+}
+
+.automation-button-secondary {
+  min-height: 52px;
+  padding: 0 23px;
+  border: 1px solid rgba(23, 23, 23, 0.12);
+  color: #171717;
+  background: transparent;
+}
+
+.automation-proof {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 45px;
+}
+
+.automation-proof > div {
+  padding: 17px;
+  border: 1px solid rgba(23, 23, 23, 0.08);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.automation-proof strong {
+  display: block;
+  font-size: 0.82rem;
+}
+
+.automation-proof span {
+  display: block;
+  margin-top: 4px;
+  color: #777;
+  font-size: 0.66rem;
+  line-height: 1.45;
+}
+
+.automation-diagram {
+  position: relative;
+  padding: 35px;
+  border: 1px solid rgba(23, 23, 23, 0.08);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 80% 8%, rgba(109, 93, 252, 0.14), transparent 27%),
+    #171717;
+  color: white;
+  box-shadow: 0 38px 90px rgba(23, 23, 23, 0.14);
+}
+
+.automation-diagram-label {
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.automation-node {
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 21px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.automation-node.logic {
+  background: rgba(109, 93, 252, 0.16);
+  border-color: rgba(170, 161, 255, 0.2);
+}
+
+.automation-node span {
+  color: #aaa1ff;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.automation-node strong {
+  display: block;
+  margin-top: 13px;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.15rem;
+}
+
+.automation-node small {
+  display: block;
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.automation-connector {
+  padding: 9px 0;
+  text-align: center;
+  color: #aaa1ff;
+}
+
+.automation-review {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  margin-top: 20px;
+  padding: 17px;
+  border-radius: 17px;
+  background: white;
+  color: #171717;
+}
+
+.automation-review > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: rgba(109, 93, 252, 0.12);
+  color: #6d5dfc;
+  font-weight: 800;
+}
+
+.automation-review strong {
+  display: block;
+  font-size: 0.82rem;
+}
+
+.automation-review small {
+  display: block;
+  margin-top: 2px;
+  color: #777;
+  font-size: 0.68rem;
+}
+
+.automation-statement {
+  padding: 62px 0;
+  background: #171717;
+  color: white;
+}
+
+.statement-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr;
+  gap: 70px;
+  align-items: end;
+}
+
+.statement-grid > div > span {
+  color: #aaa1ff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.statement-grid h2 {
+  margin-top: 15px;
+  max-width: 760px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.4rem, 4vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.statement-grid > p {
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.75;
+}
+
+.automation-section {
+  padding: 120px 0;
+}
+
+.automation-section-heading {
+  display: grid;
+  grid-template-columns: 1fr 0.6fr;
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 55px;
+}
+
+.automation-eyebrow {
+  margin-bottom: 18px;
+  color: #6d5dfc;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+}
+
+.automation-eyebrow.light {
+  color: #c8c2ff;
+}
+
+.automation-section-heading h2,
+.approach-copy h2,
+.automation-pricing-card h2,
+.automation-contact h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.7rem, 5vw, 4.7rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.automation-section-heading > p {
+  color: #686868;
+  line-height: 1.75;
+}
+
+.examples-section {
+  background: white;
+}
+
+.automation-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.automation-example-card {
+  min-height: 270px;
+  padding: 27px;
+  border: 1px solid rgba(23, 23, 23, 0.08);
+  border-radius: 24px;
+  background: #f7f7f4;
+}
+
+.automation-example-card > span {
+  color: #6d5dfc;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.automation-example-card h3 {
+  margin-top: 50px;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.25rem;
+}
+
+.automation-example-card p {
+  margin-top: 10px;
+  color: #686868;
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+.approach-section {
+  background: #efefe9;
+}
+
+.approach-card {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 70px;
+  align-items: start;
+}
+
+.approach-copy > p:not(.automation-eyebrow) {
+  margin-top: 22px;
+  color: #686868;
+  line-height: 1.75;
+}
+
+.approach-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.approach-column {
+  padding: 27px;
+  border-radius: 24px;
+  background: white;
+}
+
+.approach-column > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.approach-column.good > span {
+  background: rgba(109, 93, 252, 0.11);
+  color: #6d5dfc;
+}
+
+.approach-column.review > span {
+  background: rgba(23, 23, 23, 0.07);
+  color: #171717;
+}
+
+.approach-column strong {
+  display: block;
+  margin-top: 24px;
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+}
+
+.approach-column ul {
+  display: grid;
+  gap: 10px;
+  margin-top: 17px;
+  padding-left: 18px;
+  color: #686868;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.process-automation-section {
+  background: white;
+}
+
+.automation-process-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 13px;
+}
+
+.automation-process-grid article {
+  min-height: 285px;
+  padding: 24px;
+  border: 1px solid rgba(23, 23, 23, 0.08);
+  border-radius: 22px;
+  background: #f7f7f4;
+}
+
+.automation-process-grid article:nth-child(3) {
+  background: #171717;
+  color: white;
+}
+
+.automation-process-grid article > span {
+  color: #6d5dfc;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.automation-process-grid h3 {
+  margin-top: 60px;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.08rem;
+}
+
+.automation-process-grid p {
+  margin-top: 10px;
+  color: #686868;
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.automation-process-grid article:nth-child(3) p {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.pricing-automation-section {
+  background: #f7f7f4;
+}
+
+.automation-pricing-card {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr;
+  gap: 70px;
+  padding: 55px;
+  border-radius: 30px;
+  background: white;
+}
+
+.automation-pricing-card > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.automation-pricing-card > div:last-child p {
+  color: #686868;
+  line-height: 1.75;
+}
+
+.automation-pricing-card > div:last-child strong {
+  margin-top: 25px;
+  font-family: "Manrope", sans-serif;
+  font-size: 2.2rem;
+}
+
+.automation-pricing-card > div:last-child small {
+  margin-top: 5px;
+  color: #777;
+}
+
+.automation-contact {
+  background: #171717;
+  color: white;
+}
+
+.automation-contact-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 75px;
+  align-items: start;
+}
+
+.automation-contact > .automation-container > div > p:not(.automation-eyebrow) {
+  margin-top: 24px;
+  color: rgba(255, 255, 255, 0.56);
+  line-height: 1.75;
+}
+
+.automation-contact-note {
+  margin-top: 30px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.automation-contact-note strong,
+.automation-contact-note span {
+  display: block;
+}
+
+.automation-contact-note strong {
+  font-size: 0.78rem;
+}
+
+.automation-contact-note span {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.72rem;
+}
+
+.automation-form {
+  display: grid;
+  gap: 16px;
+  padding: 33px;
+  border-radius: 27px;
+  background: white;
+  color: #171717;
+}
+
+.automation-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+.automation-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.automation-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.automation-form label > span {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.automation-form input,
+.automation-form textarea {
+  width: 100%;
+  border: 1px solid rgba(23, 23, 23, 0.11);
+  border-radius: 13px;
+  background: #f7f7f4;
+  color: #171717;
+  font: inherit;
+  outline: none;
+}
+
+.automation-form input {
+  height: 48px;
+  padding: 0 14px;
+}
+
+.automation-form textarea {
+  resize: vertical;
+  padding: 14px;
+  line-height: 1.55;
+}
+
+.automation-form input:focus,
+.automation-form textarea:focus {
+  border-color: rgba(109, 93, 252, 0.5);
+  box-shadow: 0 0 0 3px rgba(109, 93, 252, 0.08);
+}
+
+.automation-consent {
+  display: flex !important;
+  grid-template-columns: none !important;
+  gap: 9px !important;
+  align-items: flex-start;
+  color: #686868;
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.automation-consent input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.automation-consent a {
+  color: #6d5dfc;
+  font-weight: 700;
+}
+
+.automation-submit {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+}
+
+.automation-footer {
+  background: #0f0f0f;
+  color: white;
+}
+
+.automation-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.automation-footer-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.automation-footer-brand span {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+}
+
+.automation-footer-brand small {
+  color: #aaa1ff;
+  font-size: 0.65rem;
+}
+
+.automation-footer-inner p,
+.automation-footer-inner > a:last-child {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.74rem;
+}
+
+@media (max-width: 1050px) {
+  .automation-nav nav {
+    display: none;
+  }
+
+  .automation-hero-grid,
+  .statement-grid,
+  .approach-card,
+  .automation-pricing-card,
+  .automation-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .automation-diagram {
+    max-width: 720px;
+  }
+
+  .automation-section-heading {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .automation-examples-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .automation-process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .automation-container {
+    width: min(calc(100% - 30px), 1180px);
+  }
+
+  .automation-hero {
+    padding: 65px 0 85px;
+  }
+
+  .automation-hero h1 {
+    font-size: clamp(3.2rem, 14vw, 4.9rem);
+  }
+
+  .automation-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .automation-section {
+    padding: 85px 0;
+  }
+
+  .automation-examples-grid,
+  .approach-columns,
+  .automation-process-grid,
+  .automation-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .automation-pricing-card {
+    padding: 34px 25px;
+  }
+
+  .automation-footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

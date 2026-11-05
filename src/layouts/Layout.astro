@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = "AVARA by BLUVA creates modern, fast and easy-to-manage websites for freelancers and small businesses.",
+  description = "AVARA by BLUVA creates modern websites, e-commerce solutions and custom business automations for freelancers and small businesses.",
   image = "/images/og-avara.png",
   noindex = false,
 } = Astro.props;
@@ -38,11 +38,13 @@ const path =
 const languageMap: Record<string, string> = {
   "/": "/en/",
   "/restaurants/": "/en/restaurants/",
+  "/automatisation/": "/en/automation/",
   "/merci/": "/en/thank-you/",
   "/mentions-legales/": "/en/legal-notice/",
   "/confidentialite/": "/en/privacy/",
   "/en/": "/",
   "/en/restaurants/": "/restaurants/",
+  "/en/automation/": "/automatisation/",
   "/en/thank-you/": "/merci/",
   "/en/legal-notice/": "/mentions-legales/",
   "/en/privacy/": "/confidentialite/",
@@ -69,8 +71,8 @@ const englishURL = englishPath
   : null;
 
 const socialImageAlt = isEnglish
-  ? "AVARA by BLUVA — Business websites and e-commerce"
-  : "AVARA by BLUVA — Création de sites vitrines et e-commerce";
+  ? "AVARA by BLUVA — Business websites, e-commerce and automation"
+  : "AVARA by BLUVA — Sites vitrines, e-commerce et automatisation";
 ---
 
 <!doctype html>

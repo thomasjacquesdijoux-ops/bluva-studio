@@ -1,0 +1,976 @@
+---
+import "../styles/home-v2.css";
+
+interface Props {
+  lang?: "fr" | "en";
+}
+
+const { lang = "fr" } = Astro.props;
+const en = lang === "en";
+
+const homeUrl = en ? "/en/" : "/";
+const restaurantUrl = en ? "/en/restaurants/" : "/restaurants/";
+const automationUrl = en ? "/en/automation/" : "/automatisation/";
+const privacyUrl = en ? "/en/privacy/" : "/confidentialite/";
+const legalUrl = en ? "/en/legal-notice/" : "/mentions-legales/";
+const thankYouUrl = en ? "/en/thank-you/" : "/merci/";
+
+const services = en
+  ? [
+      {
+        number: "01",
+        tag: "Core offer",
+        title: "Business website",
+        text: "A professional website built around your business, with a structure that reflects what your customers actually need.",
+        items: [
+          "Structure tailored to your activity",
+          "Responsive design",
+          "Simple content management",
+          "Basic technical SEO",
+          "Contact forms",
+          "Launch & handover",
+        ],
+        priceLabel: "From",
+        price: "€790 excl. VAT",
+        href: "#pricing",
+        link: "View the offer →",
+        className: "service-featured",
+        icon: "↗",
+      },
+      {
+        number: "02",
+        tag: "Tailored",
+        title: "E-commerce",
+        text: "An online store designed around your products, your customers and the way your business operates.",
+        items: [
+          "Product catalogue",
+          "Online payments",
+          "Delivery or pickup",
+          "Content management",
+          "Responsive design",
+          "Integrations when needed",
+        ],
+        priceLabel: "Depending on your needs",
+        price: "Custom quote",
+        href: "#contact",
+        link: "Discuss the project →",
+        className: "service-commerce",
+        icon: "◇",
+      },
+      {
+        number: "03",
+        tag: "Business process",
+        title: "Custom automation",
+        text: "A solution designed around your workflow to reduce repetitive work, connect tools and make information move automatically.",
+        items: [
+          "Process analysis",
+          "API & software integrations",
+          "Data processing",
+          "Document generation",
+          "Internal workflows",
+          "Checks & reconciliation",
+        ],
+        priceLabel: "Project-based",
+        price: "Custom quote",
+        href: automationUrl,
+        link: "Explore automation →",
+        className: "service-automation",
+        icon: "⌁",
+      },
+    ]
+  : [
+      {
+        number: "01",
+        tag: "Offre principale",
+        title: "Site vitrine",
+        text: "Un site professionnel construit autour de votre activité, avec une structure adaptée à ce que vos clients ont réellement besoin de trouver.",
+        items: [
+          "Structure adaptée à votre activité",
+          "Design responsive",
+          "Gestion simple des contenus",
+          "SEO technique de base",
+          "Formulaires de contact",
+          "Mise en ligne & prise en main",
+        ],
+        priceLabel: "À partir de",
+        price: "790 € HTVA",
+        href: "#pricing",
+        link: "Voir l’offre →",
+        className: "service-featured",
+        icon: "↗",
+      },
+      {
+        number: "02",
+        tag: "Sur mesure",
+        title: "E-commerce",
+        text: "Une boutique en ligne pensée autour de vos produits, de vos clients et du fonctionnement réel de votre activité.",
+        items: [
+          "Catalogue produits",
+          "Paiement en ligne",
+          "Livraison ou retrait",
+          "Gestion des contenus",
+          "Design responsive",
+          "Intégrations si nécessaire",
+        ],
+        priceLabel: "Selon les besoins",
+        price: "Sur devis",
+        href: "#contact",
+        link: "Discuter du projet →",
+        className: "service-commerce",
+        icon: "◇",
+      },
+      {
+        number: "03",
+        tag: "Process métier",
+        title: "Automatisation sur mesure",
+        text: "Une solution conçue autour de votre processus pour réduire les tâches répétitives, connecter vos outils et faire circuler l’information automatiquement.",
+        items: [
+          "Analyse du processus",
+          "API & intégrations logicielles",
+          "Traitement de données",
+          "Génération de documents",
+          "Workflows internes",
+          "Contrôles & rapprochements",
+        ],
+        priceLabel: "Projet personnalisé",
+        price: "Sur devis",
+        href: automationUrl,
+        link: "Découvrir l’automatisation →",
+        className: "service-automation",
+        icon: "⌁",
+      },
+    ];
+
+const sectors = en
+  ? [
+      { icon: "01", title: "Restaurants & hospitality", text: "Menus, bookings, opening hours and a strong mobile experience.", href: restaurantUrl, link: "See the restaurant offer →" },
+      { icon: "02", title: "Trades & construction", text: "Services, project galleries, service areas and quote requests.", href: "#contact", link: "Discuss your activity →" },
+      { icon: "03", title: "Beauty & wellness", text: "Services, pricing, portfolios, opening hours and booking links.", href: "#contact", link: "Discuss your activity →" },
+      { icon: "04", title: "Real estate", text: "Credibility, properties, valuation requests and direct enquiries.", href: "#contact", link: "Discuss your activity →" },
+      { icon: "05", title: "Retail & local shops", text: "Brand universe, collections, practical information and e-commerce evolution.", href: "#contact", link: "Discuss your activity →" },
+      { icon: "06", title: "Associations & non-profits", text: "Clear information, resources, actions, events and accessible contact paths.", href: "#contact", link: "Discuss your activity →" },
+    ]
+  : [
+      { icon: "01", title: "Restaurants & Horeca", text: "Carte, réservation, horaires et expérience mobile pensée pour vos clients.", href: restaurantUrl, link: "Voir l’offre restaurants →" },
+      { icon: "02", title: "Artisans & bâtiment", text: "Services, réalisations, zones d’intervention et demandes de devis.", href: "#contact", link: "Parler de votre activité →" },
+      { icon: "03", title: "Beauté & bien-être", text: "Prestations, tarifs, réalisations, horaires et prise de rendez-vous.", href: "#contact", link: "Parler de votre activité →" },
+      { icon: "04", title: "Immobilier", text: "Crédibilité, biens, demandes d’estimation et prises de contact directes.", href: "#contact", link: "Parler de votre activité →" },
+      { icon: "05", title: "Commerces locaux", text: "Univers de marque, collections, informations pratiques et évolution e-commerce.", href: "#contact", link: "Parler de votre activité →" },
+      { icon: "06", title: "Associations & ASBL", text: "Informations claires, ressources, actions, événements et contacts accessibles.", href: "#contact", link: "Parler de votre activité →" },
+    ];
+
+const faq = en
+  ? [
+      ["How many pages are included?", "We do not artificially limit a project to a fixed number of pages. The structure is defined around the needs of your activity. The final scope and price are confirmed before work starts."],
+      ["Do I own my website?", "The domain, content and project access remain under your control. AVARA does not impose a multi-year website rental contract. If you change provider, the deliverable website files can be transferred."],
+      ["Is there a mandatory monthly subscription?", "No. For a standard business website, hosting and light maintenance start at €59 excl. VAT per year. More advanced services are only added when they are actually needed."],
+      ["Can I update the website myself?", "Yes. Essential content can be made editable through a simple content management interface, depending on the project."],
+      ["How long does a website take?", "Timing depends on the amount of content, the features and how quickly materials are available. The expected schedule is agreed before development begins."],
+      ["Can you connect my booking or business tools?", "Often, yes. Booking platforms, forms, APIs and third-party tools can be linked or integrated depending on what each service allows."],
+      ["What does basic SEO include?", "A clean technical structure, page titles, metadata, sitemap, mobile performance and indexable pages. Ongoing SEO campaigns or content strategies are separate services."],
+      ["What can be automated?", "Repetitive data entry, file processing, document generation, software-to-software synchronisation, checks, notifications and internal workflows are common examples. Every automation project starts with an analysis of the current process."],
+    ]
+  : [
+      ["Combien de pages sont incluses ?", "Nous ne limitons pas artificiellement un projet à un nombre fixe de pages. La structure est définie selon les besoins de votre activité. Le périmètre et le prix sont confirmés avant le début du développement."],
+      ["Suis-je propriétaire de mon site ?", "Le nom de domaine, les contenus et les accès du projet restent sous votre contrôle. AVARA n’impose pas de contrat de location du site sur plusieurs années. Si vous changez de prestataire, les fichiers livrables du site peuvent être transférés."],
+      ["Y a-t-il un abonnement mensuel obligatoire ?", "Non. Pour un site vitrine standard, l’hébergement et la maintenance légère commencent à 59 € HTVA par an. Les services plus avancés ne sont ajoutés que lorsqu’ils sont réellement nécessaires."],
+      ["Puis-je modifier mon site moi-même ?", "Oui. Les contenus essentiels peuvent être rendus modifiables depuis une interface simple, selon la configuration retenue pour le projet."],
+      ["Combien de temps faut-il pour créer un site ?", "Le délai dépend du volume de contenu, des fonctionnalités et de la disponibilité des éléments nécessaires. Le planning estimatif est défini avant le démarrage."],
+      ["Pouvez-vous connecter mon système de réservation ou mes outils ?", "Souvent, oui. Plateformes de réservation, formulaires, API et outils tiers peuvent être reliés ou intégrés selon les possibilités offertes par chaque service."],
+      ["Que comprend le SEO de base ?", "Une structure technique propre, les titres de pages, métadonnées, sitemap, affichage mobile et pages correctement indexables. Une stratégie SEO continue ou la création régulière de contenu sont des prestations distinctes."],
+      ["Que peut-on automatiser ?", "Encodages répétitifs, traitement de fichiers, génération de documents, synchronisation entre logiciels, contrôles, notifications ou workflows internes sont des exemples fréquents. Chaque projet commence par l’analyse du processus existant."],
+    ];
+
+const process = en
+  ? [
+      ["01", "Understand", "We look at your activity, your users and the result you want to achieve.", "Needs & scope"],
+      ["02", "Design", "We define the right structure, user experience or technical solution before development.", "Solution design"],
+      ["03", "Build & validate", "The project is developed, tested and reviewed with you before delivery.", "Development & review"],
+      ["04", "Launch", "Website publication or automation deployment, handover and final checks.", "Go live"],
+    ]
+  : [
+      ["01", "Comprendre", "Nous regardons votre activité, vos utilisateurs et le résultat que vous souhaitez obtenir.", "Besoin & périmètre"],
+      ["02", "Concevoir", "Nous définissons la bonne structure, l’expérience ou la solution technique avant de développer.", "Conception"],
+      ["03", "Développer & valider", "Le projet est développé, testé puis revu avec vous avant sa livraison.", "Développement & validation"],
+      ["04", "Mettre en service", "Publication du site ou déploiement de l’automatisation, transfert et contrôles finaux.", "Mise en ligne"],
+    ];
+---
+
+<header class="header">
+  <div class="container navbar">
+    <a href={homeUrl} class="brand-logo brand-logo-image" aria-label="AVARA by BLUVA">
+      <img src="/images/logo-avara.png" alt="AVARA by BLUVA" />
+    </a>
+
+    <nav class="nav">
+      <a href="#services">{en ? "Services" : "Services"}</a>
+      <a href="#sectors">{en ? "Industries" : "Secteurs"}</a>
+      <a href="#projects">{en ? "Projects" : "Projets"}</a>
+      <a href="#pricing">{en ? "Pricing" : "Tarifs"}</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#contact" class="button button-small">
+      {en ? "Discuss my project" : "Parler de mon projet"}
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="hero v2-hero">
+    <div class="hero-glow hero-glow-one"></div>
+    <div class="hero-glow hero-glow-two"></div>
+
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          {en
+            ? "Web development & automation · Charleroi, Belgium"
+            : "Création de sites web & automatisation · Charleroi & Wallonie"}
+        </div>
+
+        <h1>
+          {en ? "A professional website" : "Un site professionnel"}
+          <span>{en ? "that belongs to you." : "qui vous appartient."}</span>
+        </h1>
+
+        <p class="hero-description">
+          {en
+            ? "Built to turn visitors into customers. AVARA creates modern business websites, e-commerce solutions and custom automations for freelancers and small businesses."
+            : "Pensé pour transformer vos visiteurs en clients. AVARA crée des sites vitrines, e-commerce et automatisations sur mesure pour les indépendants et petites entreprises."}
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="button">
+            {en ? "Discuss my project" : "Parler de mon projet"}
+            <span class="button-arrow">→</span>
+          </a>
+
+          <a href="#projects" class="button button-secondary">
+            {en ? "View projects" : "Voir les réalisations"}
+          </a>
+        </div>
+
+        <div class="hero-proof">
+          <div>
+            <strong>{en ? "From €790" : "À partir de 790 €"}</strong>
+            <span>{en ? "Excl. VAT · Business website" : "HTVA · Site vitrine"}</span>
+          </div>
+
+          <div class="proof-separator"></div>
+
+          <div>
+            <strong>{en ? "No monthly rental" : "Pas de location mensuelle"}</strong>
+            <span>{en ? "Your project stays under your control" : "Votre projet reste sous votre contrôle"}</span>
+          </div>
+
+          <div class="proof-separator"></div>
+
+          <div>
+            <strong>{en ? "Custom quote" : "Sur devis"}</strong>
+            <span>{en ? "E-commerce & automation" : "E-commerce & automatisation"}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-showcase">
+        <div class="showcase-orbit orbit-one"></div>
+        <div class="showcase-orbit orbit-two"></div>
+
+        <div class="desktop-window">
+          <div class="desktop-topbar">
+            <div class="browser-controls">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="browser-url">atelier-verde.be</div>
+          </div>
+
+          <div class="website-preview">
+            <div class="preview-navigation">
+              <div class="preview-brand">atelier<span>verde</span></div>
+              <div class="preview-menu">
+                <span>{en ? "Home" : "Accueil"}</span>
+                <span>Services</span>
+                <span>{en ? "Projects" : "Projets"}</span>
+                <span>Contact</span>
+              </div>
+            </div>
+
+            <div class="preview-hero">
+              <div class="preview-copy">
+                <span class="preview-label">{en ? "Architecture & renovation" : "Architecture & rénovation"}</span>
+                <h3>{en ? "Spaces designed to last." : "Des espaces pensés pour durer."}</h3>
+                <p>{en ? "Design, renovation and support for contemporary residential projects." : "Conception, rénovation et accompagnement de projets résidentiels contemporains."}</p>
+                <div class="preview-button">{en ? "Explore our projects" : "Découvrir les projets"}</div>
+              </div>
+              <div class="preview-photo"></div>
+            </div>
+
+            <div class="preview-services">
+              <div><span>01</span><strong>Architecture</strong></div>
+              <div><span>02</span><strong>{en ? "Renovation" : "Rénovation"}</strong></div>
+              <div><span>03</span><strong>Consulting</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-window">
+          <div class="mobile-notch"></div>
+          <div class="mobile-content">
+            <div class="mobile-nav">
+              <strong>atelier<span>verde</span></strong>
+              <span>☰</span>
+            </div>
+            <div class="mobile-image"></div>
+            <span class="mobile-label">Architecture</span>
+            <h4>{en ? "Spaces designed to last." : "Des espaces pensés pour durer."}</h4>
+            <div class="mobile-button">{en ? "Our projects" : "Nos projets"}</div>
+          </div>
+        </div>
+
+        <div class="floating-card floating-card-one">
+          <span class="floating-icon">✓</span>
+          <div>
+            <strong>Responsive</strong>
+            <small>Mobile & desktop</small>
+          </div>
+        </div>
+
+        <div class="floating-card floating-card-two">
+          <span class="floating-icon">✦</span>
+          <div>
+            <strong>{en ? "Tailored" : "Sur mesure"}</strong>
+            <small>{en ? "To your business" : "À votre activité"}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="highlights">
+    <div class="container highlight-grid">
+      <div class="highlight">
+        <strong>{en ? "€790" : "790 €"}</strong>
+        <span>{en ? "excl. VAT · from" : "HTVA · à partir de"}</span>
+        <p>{en ? "A structure tailored to your activity" : "Une structure adaptée à votre activité"}</p>
+      </div>
+
+      <div class="highlight">
+        <strong>{en ? "Yours" : "À vous"}</strong>
+        <span>{en ? "no multi-year rental" : "pas de location pluriannuelle"}</span>
+        <p>{en ? "Domain, content and access stay under your control" : "Domaine, contenus et accès sous votre contrôle"}</p>
+      </div>
+
+      <div class="highlight">
+        <strong>€59</strong>
+        <span>{en ? "excl. VAT / year" : "HTVA / an"}</span>
+        <p>{en ? "Hosting & light maintenance from" : "Hébergement & maintenance légère dès"}</p>
+      </div>
+
+      <div class="highlight">
+        <strong>{en ? "Custom" : "Sur mesure"}</strong>
+        <span>{en ? "business automation" : "automatisation métier"}</span>
+        <p>{en ? "Built around your processes and tools" : "Construite autour de vos processus et outils"}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section services-section">
+    <div class="container">
+      <div class="services-heading">
+        <div>
+          <p class="eyebrow">{en ? "Services" : "Services"}</p>
+          <h2>{en ? "Digital solutions built around your business." : "Des solutions digitales construites autour de votre activité."}</h2>
+        </div>
+
+        <p>
+          {en
+            ? "A website, an online store or a business automation project should adapt to the way you work — not force your business into a generic template."
+            : "Un site, une boutique en ligne ou un projet d’automatisation doit s’adapter à votre façon de travailler — pas l’inverse."}
+        </p>
+      </div>
+
+      <div class="services-grid">
+        {services.map((service) => (
+          <article class={`service-card ${service.className}`}>
+            <div class="service-top">
+              <span class="service-number">{service.number}</span>
+              <span class="service-tag neutral">{service.tag}</span>
+            </div>
+
+            <div class="service-icon">{service.icon}</div>
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+
+            <ul class="service-list">
+              {service.items.map((item) => <li>{item}</li>)}
+            </ul>
+
+            <div class="service-price-row">
+              <div>
+                <span>{service.priceLabel}</span>
+                <strong>{service.price}</strong>
+              </div>
+              <a href={service.href} class="service-link">{service.link}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="support-strip">
+        <div>
+          <span class="support-strip-label">{en ? "Existing project?" : "Projet existant ?"}</span>
+          <strong>{en ? "Improvements, new features and technical support" : "Évolutions, nouvelles fonctionnalités et support technique"}</strong>
+        </div>
+        <p>{en ? "Additional work can be handled at €65 excl. VAT/hour or on a fixed quote when the scope is known." : "Les évolutions hors périmètre peuvent être réalisées à 65 € HTVA/heure ou sur devis lorsque le besoin est défini."}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sectors" class="section sectors-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">{en ? "Industries" : "Secteurs"}</p>
+          <h2>{en ? "A website designed for how your customers choose." : "Un site pensé pour la façon dont vos clients choisissent."}</h2>
+        </div>
+        <p class="section-intro">
+          {en
+            ? "A restaurant, a construction company and a real-estate professional do not need the same website. The structure, calls to action and content should reflect the business."
+            : "Un restaurant, un terrassier et un professionnel de l’immobilier n’ont pas besoin du même site. La structure, les appels à l’action et les contenus doivent refléter le métier."}
+        </p>
+      </div>
+
+      <div class="sectors-grid">
+        {sectors.map((sector) => (
+          <article class="sector-card">
+            <span class="sector-number">{sector.icon}</span>
+            <h3>{sector.title}</h3>
+            <p>{sector.text}</p>
+            <a href={sector.href}>{sector.link}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section ownership-section">
+    <div class="container">
+      <div class="ownership-card">
+        <div class="ownership-copy">
+          <p class="eyebrow">{en ? "No lock-in" : "Sans enfermement"}</p>
+          <h2>{en ? "Your website. Your content. Your access." : "Votre site. Vos contenus. Vos accès."}</h2>
+          <p>
+            {en
+              ? "AVARA does not build its business model around renting your website back to you for years. The domain and content remain under your control, and the deliverable project can be transferred if you decide to work with someone else."
+              : "AVARA ne construit pas son modèle sur la location de votre propre site pendant plusieurs années. Le domaine et les contenus restent sous votre contrôle, et le projet livrable peut être transféré si vous décidez un jour de travailler avec un autre prestataire."}
+          </p>
+        </div>
+
+        <div class="ownership-grid">
+          <div>
+            <span>01</span>
+            <strong>{en ? "No multi-year website rental" : "Pas de location pluriannuelle"}</strong>
+            <p>{en ? "You pay for the creation of your project, not for the right to keep using it." : "Vous payez la création de votre projet, pas le droit de continuer à l’utiliser."}</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>{en ? "Domain under your control" : "Domaine sous votre contrôle"}</strong>
+            <p>{en ? "The domain can remain registered in your name and connected to the website." : "Le nom de domaine peut rester enregistré à votre nom et relié au site."}</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>{en ? "Transferable project" : "Projet transférable"}</strong>
+            <p>{en ? "If the collaboration ends, the deliverable website files and access can be handed over." : "Si la collaboration s’arrête, les fichiers livrables du site et les accès peuvent être transmis."}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ecosystem-general">
+    <div class="container ecosystem-general-card">
+      <div>
+        <p class="eyebrow">{en ? "Your online presence" : "Votre présence en ligne"}</p>
+        <h2>
+          {en ? "Social media gets you noticed. Search gets you found. Your website helps people choose." : "Les réseaux vous font découvrir. Google vous fait trouver. Votre site vous fait choisir."}
+        </h2>
+        <p>
+          {en
+            ? "Facebook, Instagram and Google are useful channels. Your website brings your services, prices, work, opening hours and contact options together in one reliable place that you control."
+            : "Facebook, Instagram et Google sont d’excellents canaux. Votre site rassemble vos services, tarifs, réalisations, horaires et moyens de contact dans un espace fiable qui vous appartient."}
+        </p>
+      </div>
+
+      <div class="ecosystem-steps">
+        <div><span>01</span><strong>Google</strong><small>{en ? "Find" : "Trouver"}</small></div>
+        <span class="ecosystem-arrow">→</span>
+        <div><span>02</span><strong>{en ? "Social" : "Réseaux"}</strong><small>{en ? "Discover" : "Découvrir"}</small></div>
+        <span class="ecosystem-arrow">→</span>
+        <div class="ecosystem-main"><span>03</span><strong>{en ? "Your website" : "Votre site"}</strong><small>{en ? "Understand & act" : "Comprendre & agir"}</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section portfolio-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">{en ? "Projects & concepts" : "Projets & réalisations"}</p>
+          <h2>{en ? "A few of the worlds we can create." : "Quelques univers que nous pouvons créer."}</h2>
+        </div>
+        <p class="section-intro">
+          {en
+            ? "Demonstration concepts created to show different styles, industries and features. Real client projects will gradually complete this selection."
+            : "Des concepts de démonstration créés pour illustrer différents styles, secteurs et fonctionnalités. Les réalisations clients viendront progressivement compléter cette sélection."}
+        </p>
+      </div>
+
+      <div class="portfolio-grid">
+        <article class="project-card project-large">
+          <div class="project-preview restaurant-showcase-preview">
+            <div class="restaurant-browser">
+              <div class="restaurant-browser-bar">
+                <div class="browser-controls"><span></span><span></span><span></span></div>
+                <div class="restaurant-browser-url">lecomptoir27.be</div>
+              </div>
+
+              <div class="restaurant-showcase-site">
+                <div class="restaurant-showcase-nav">
+                  <div class="restaurant-logo">LE COMPTOIR <span>27</span></div>
+                  <div class="restaurant-showcase-menu">
+                    <span>Menu</span><span>Restaurant</span><span>Gallery</span><span>Contact</span><strong>Book</strong>
+                  </div>
+                </div>
+
+                <div class="restaurant-showcase-hero">
+                  <div class="restaurant-showcase-content">
+                    <span class="restaurant-showcase-kicker">Bistro · Seasonal cuisine</span>
+                    <h3>Food made to be shared.</h3>
+                    <p>Seasonal produce, generous cooking and a place designed for memorable moments.</p>
+                    <div class="restaurant-showcase-actions">
+                      <span class="restaurant-primary-action">Book a table</span>
+                      <span class="restaurant-secondary-action">View the menu</span>
+                    </div>
+                  </div>
+
+                  <div class="restaurant-booking-card">
+                    <span class="booking-label">Reservations</span>
+                    <strong>Open Tuesday to Saturday</strong>
+                    <p>12:00 — 14:30 · 18:30 — 22:30</p>
+                    <span class="booking-chip">Nalinnes · Booking recommended</span>
+                  </div>
+                </div>
+
+                <div class="restaurant-showcase-bottom">
+                  <div><span>01</span><strong>Seasonal picks</strong><small>Fresh produce</small></div>
+                  <div><span>02</span><strong>Cocktails</strong><small>Classics & creations</small></div>
+                  <div><span>03</span><strong>Desserts</strong><small>Homemade</small></div>
+                  <div><span>Tue — Sat</span><strong>12:00 — 14:30</strong><small>18:30 — 22:30</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div>
+              <span class="project-type">{en ? "Restaurant / booking" : "Restaurant / réservation"}</span>
+              <h3>Le Comptoir 27</h3>
+              <a href={restaurantUrl} class="project-link">
+                {en ? "Discover our restaurant website offer →" : "Découvrir notre offre pour les restaurants →"}
+              </a>
+            </div>
+            <p>
+              {en
+                ? "An immersive website concept designed to create desire and make menus, bookings and practical information immediately accessible."
+                : "Un concept immersif pensé pour donner envie et rendre immédiatement accessibles la carte, la réservation et les informations pratiques."}
+            </p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-preview architecture-preview">
+            <div class="project-browser">
+              <div class="mini-browser-bar"><span></span><span></span><span></span></div>
+              <div class="architecture-site">
+                <div class="architecture-top">
+                  <strong>atelier verde</strong>
+                  <div><span>Projects</span><span>Studio</span><span>Contact</span></div>
+                </div>
+                <div class="architecture-main">
+                  <div>
+                    <small>Architecture & renovation</small>
+                    <h3>A different way to live.</h3>
+                    <p>Contemporary spaces shaped around light, materials and the way you live.</p>
+                    <span class="fake-link">Explore the projects →</span>
+                  </div>
+                  <div class="architecture-image">
+                    <div class="architecture-image-label"><span>Residential project</span><strong>Maison R.</strong></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info vertical">
+            <div><span class="project-type">{en ? "Business website" : "Site vitrine"}</span><h3>Atelier Verde</h3></div>
+            <p>{en ? "A minimal, premium editorial identity designed for an architecture and renovation studio." : "Une identité éditoriale minimaliste et premium pour un studio d’architecture et de rénovation."}</p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-preview shop-preview">
+            <div class="shop-site">
+              <div class="shop-nav">
+                <strong>Éclat.</strong>
+                <div><span>Shop</span><span>Collections</span><span>Cart · 2</span></div>
+              </div>
+              <div class="shop-main">
+                <div class="shop-copy">
+                  <span>New collection</span>
+                  <h3>Jewellery designed to last.</h3>
+                  <p>Minimal pieces selected to be worn every day.</p>
+                  <div class="shop-button">View the collection</div>
+                </div>
+                <div class="shop-image">
+                  <div class="shop-image-label"><span>Collection 2026</span><strong>Éclat.</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info vertical">
+            <div><span class="project-type">E-commerce</span><h3>Éclat</h3></div>
+            <p>{en ? "An online store concept built around a jewellery catalogue and a simple shopping experience." : "Un concept de boutique en ligne construit autour d’un catalogue de bijoux et d’une expérience d’achat simple."}</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="portfolio-note">
+        {en
+          ? "These are demonstration concepts and are not presented as client work."
+          : "Ces concepts sont des démonstrations et ne sont pas présentés comme des réalisations clients."}
+      </p>
+    </div>
+  </section>
+
+  <section id="automation" class="section automation-home">
+    <div class="container automation-home-card">
+      <div class="automation-home-copy">
+        <p class="eyebrow">{en ? "Custom automation" : "Automatisation sur mesure"}</p>
+        <h2>{en ? "Automate the work that slows your business down." : "Automatisez ce qui vous fait perdre du temps."}</h2>
+        <p>
+          {en
+            ? "Some tasks should not be repeated manually every day. We start by understanding your current process, then design a solution around the tools and constraints you already have."
+            : "Certaines tâches ne devraient pas être répétées manuellement chaque jour. Nous commençons par comprendre votre processus actuel, puis nous concevons une solution autour des outils et contraintes que vous avez déjà."}
+        </p>
+
+        <a href={automationUrl} class="button">
+          {en ? "Explore automation projects" : "Découvrir les projets d’automatisation"}
+          <span class="button-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="automation-home-examples">
+        <div><span>01</span><strong>{en ? "Connect software" : "Connecter des logiciels"}</strong><p>{en ? "Move data between tools through APIs, files or scheduled synchronisation." : "Faire circuler les données entre outils via API, fichiers ou synchronisations planifiées."}</p></div>
+        <div><span>02</span><strong>{en ? "Process data automatically" : "Traiter des données automatiquement"}</strong><p>{en ? "Transform, validate, classify or reconcile information without repetitive manual work." : "Transformer, contrôler, classer ou rapprocher des informations sans tâches manuelles répétitives."}</p></div>
+        <div><span>03</span><strong>{en ? "Generate outputs" : "Générer des résultats"}</strong><p>{en ? "Documents, files, alerts, dashboards or internal actions can be produced automatically." : "Documents, fichiers, alertes, tableaux de bord ou actions internes peuvent être générés automatiquement."}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section offer-section">
+    <div class="container">
+      <div class="offer-heading">
+        <div>
+          <p class="eyebrow">{en ? "Pricing" : "Tarifs"}</p>
+          <h2>{en ? "A clear starting point, without artificial page limits." : "Un point de départ clair, sans limite artificielle de pages."}</h2>
+        </div>
+        <p>
+          {en
+            ? "The final price depends on the structure, content, languages and features required. The scope and budget are confirmed before development begins."
+            : "Le prix final dépend de la structure, des contenus, des langues et des fonctionnalités nécessaires. Le périmètre et le budget sont confirmés avant le début du développement."}
+        </p>
+      </div>
+
+      <div class="offer-layout">
+        <div class="offer-card">
+          <div class="offer-top">
+            <div>
+              <span class="offer-label">{en ? "Business website" : "Site vitrine"}</span>
+              <h3>{en ? "Everything you need for a professional and credible online presence." : "Tout ce qu’il faut pour une présence en ligne professionnelle et crédible."}</h3>
+            </div>
+            <div class="offer-price">
+              <span>{en ? "From" : "À partir de"}</span>
+              <strong>{en ? "€790" : "790 €"}</strong>
+              <small>{en ? "excl. VAT" : "HTVA"}</small>
+            </div>
+          </div>
+
+          <div class="offer-features">
+            <div class="offer-feature"><span class="check">✓</span><div><strong>{en ? "Structure tailored to your activity" : "Structure adaptée à votre activité"}</strong><p>{en ? "No arbitrary fixed page count." : "Pas de nombre de pages imposé artificiellement."}</p></div></div>
+            <div class="offer-feature"><span class="check">✓</span><div><strong>{en ? "Responsive design" : "Design responsive"}</strong><p>{en ? "Desktop, tablet and smartphone." : "Ordinateur, tablette et smartphone."}</p></div></div>
+            <div class="offer-feature"><span class="check">✓</span><div><strong>{en ? "Simple CMS" : "CMS simple"}</strong><p>{en ? "Update essential content yourself." : "Modifiez vous-même les contenus essentiels."}</p></div></div>
+            <div class="offer-feature"><span class="check">✓</span><div><strong>{en ? "Basic technical SEO" : "SEO technique de base"}</strong><p>{en ? "Clean structure, titles, sitemap and metadata." : "Structure propre, titres, sitemap et métadonnées."}</p></div></div>
+            <div class="offer-feature"><span class="check">✓</span><div><strong>{en ? "Contact & conversion" : "Contact & conversion"}</strong><p>{en ? "Forms and calls to action designed around your goal." : "Formulaires et appels à l’action pensés autour de votre objectif."}</p></div></div>
+            <div class="offer-feature"><span class="check">✓</span><div><strong>{en ? "Review before launch" : "Validation avant mise en ligne"}</strong><p>{en ? "Final corrections before publication." : "Corrections finales avant publication."}</p></div></div>
+            <div class="offer-feature"><span class="check">✓</span><div><strong>{en ? "Complete launch" : "Mise en ligne complète"}</strong><p>{en ? "Domain connection, hosting and HTTPS." : "Connexion du domaine, hébergement et HTTPS."}</p></div></div>
+            <div class="offer-feature"><span class="check">✓</span><div><strong>{en ? "Quick handover" : "Prise en main"}</strong><p>{en ? "Learn how to manage everyday updates." : "Apprenez à gérer les modifications du quotidien."}</p></div></div>
+          </div>
+
+          <div class="offer-footer">
+            <div class="annual-plan">
+              <span class="annual-icon">↻</span>
+              <div>
+                <strong>{en ? "Hosting & light maintenance" : "Hébergement & maintenance légère"}</strong>
+                <p>{en ? "Hosting, SSL and light technical support." : "Hébergement, SSL et support technique léger."}</p>
+              </div>
+              <div class="annual-price">
+                <strong>€59</strong>
+                <span>{en ? "excl. VAT / year" : "HTVA / an"}</span>
+              </div>
+            </div>
+
+            <a href="#contact" class="button offer-button">
+              {en ? "Discuss my project" : "Parler de mon projet"}
+              <span class="button-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="offer-side">
+          <div class="offer-side-card">
+            <span class="side-number">01</span>
+            <h3>{en ? "No mandatory monthly subscription." : "Pas d’abonnement mensuel obligatoire."}</h3>
+            <p>{en ? "Standard hosting and light maintenance start at only €59 excl. VAT per year." : "L’hébergement et la maintenance légère commencent à seulement 59 € HTVA par an."}</p>
+          </div>
+
+          <div class="offer-side-card dark">
+            <span class="side-number">02</span>
+            <h3>{en ? "Your project stays under your control." : "Votre projet reste sous votre contrôle."}</h3>
+            <p>{en ? "Domain, content and project access are not tied to a multi-year rental contract." : "Domaine, contenus et accès ne sont pas enfermés dans un contrat de location pluriannuel."}</p>
+          </div>
+
+          <div class="offer-side-card accent-card">
+            <span class="side-number">03</span>
+            <h3>{en ? "E-commerce or automation?" : "E-commerce ou automatisation ?"}</h3>
+            <p>{en ? "Those projects are scoped around the exact features, tools and integrations required." : "Ces projets sont chiffrés selon les fonctionnalités, outils et intégrations réellement nécessaires."}</p>
+            <span class="side-price">{en ? "Custom quote" : "Sur devis"}</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-avara">
+    <div class="container">
+      <div class="about-avara-card">
+        <div class="about-avara-label"><span>AVARA</span><small>by BLUVA</small></div>
+        <div class="about-avara-content">
+          <p class="eyebrow">{en ? "Direct support" : "Accompagnement direct"}</p>
+          <h2>{en ? "One person behind every project." : "Un interlocuteur unique derrière chaque projet."}</h2>
+          <p>
+            {en
+              ? "I personally design and develop every project, from the first discussion through to delivery. The goal is to give small businesses useful digital solutions without the cost and complexity of a large agency."
+              : "Je conçois et développe personnellement chaque projet, du premier échange jusqu’à la livraison. L’objectif est de proposer aux petites entreprises des solutions digitales utiles sans le coût ni la complexité d’une grande agence."}
+          </p>
+          <p class="about-signature">Thomas — AVARA by BLUVA</p>
+          <a href="#contact" class="button">
+            {en ? "Discuss my project" : "Parler de mon projet"} <span class="button-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="section process-section">
+    <div class="container">
+      <div class="process-heading">
+        <div>
+          <p class="eyebrow">{en ? "How it works" : "Comment ça marche"}</p>
+          <h2>{en ? "From the problem to a working solution." : "Du besoin à une solution qui fonctionne."}</h2>
+        </div>
+        <p>{en ? "A clear process to understand the need, define the scope and validate the result before delivery." : "Un processus clair pour comprendre le besoin, définir le périmètre et valider le résultat avant la livraison."}</p>
+      </div>
+
+      <div class="process-grid">
+        {process.map(([number, title, text, detail], index) => (
+          <article class={`process-card ${index === 1 ? "featured" : ""}`}>
+            <span class="process-number">{number}</span>
+            <div class="process-icon">{index === 0 ? "↗" : index === 1 ? "✦" : index === 2 ? "✓" : "↑"}</div>
+            <h3>{title}</h3>
+            <p>{text}</p>
+            <span class="process-detail">{detail}</span>
+          </article>
+        ))}
+      </div>
+
+      <div class="process-bottom">
+        <div>
+          <span class="process-bottom-label">{en ? "After delivery" : "Après la livraison"}</span>
+          <h3>{en ? "Your solution can evolve with your business." : "Votre solution peut évoluer avec votre activité."}</h3>
+          <p>{en ? "New pages, features, integrations or automation steps can be added later when they become useful." : "De nouvelles pages, fonctionnalités, intégrations ou étapes d’automatisation peuvent être ajoutées lorsque cela devient utile."}</p>
+        </div>
+        <a href="#contact" class="button">{en ? "Start my project" : "Démarrer mon projet"} <span class="button-arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section home-faq">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">FAQ</p>
+          <h2>{en ? "The questions that matter before starting." : "Les questions importantes avant de démarrer."}</h2>
+        </div>
+        <p class="section-intro">{en ? "Clear answers before a project begins help avoid unpleasant surprises later." : "Des réponses claires avant de commencer permettent d’éviter les mauvaises surprises ensuite."}</p>
+      </div>
+
+      <div class="home-faq-grid">
+        {faq.map(([question, answer]) => (
+          <details class="home-faq-item">
+            <summary>{question}<span>+</span></summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-content">
+          <p class="eyebrow light-eyebrow">{en ? "Your project" : "Votre projet"}</p>
+          <h2>
+            {en ? "Let's talk about your" : "Parlons de votre"}
+            <span>{en ? "next project." : "prochain projet."}</span>
+          </h2>
+
+          <p class="contact-intro">
+            {en
+              ? "Business website, online store, redesign or business automation: describe the result you want to achieve in a few lines."
+              : "Site vitrine, e-commerce, refonte ou automatisation métier : décrivez en quelques lignes le résultat que vous souhaitez obtenir."}
+          </p>
+
+          <p class="contact-reassurance">
+            {en
+              ? "Your idea does not need to be fully defined yet. We generally reply within one working day."
+              : "Votre idée n’a pas besoin d’être totalement définie. Nous répondons généralement sous un jour ouvrable."}
+          </p>
+
+          <div class="contact-points">
+            <div class="contact-point"><span class="contact-point-icon">01</span><div><strong>{en ? "A first discussion" : "Un premier échange"}</strong><p>{en ? "We identify what the project genuinely needs." : "Nous identifions ce dont le projet a réellement besoin."}</p></div></div>
+            <div class="contact-point"><span class="contact-point-icon">02</span><div><strong>{en ? "A tailored proposal" : "Une proposition adaptée"}</strong><p>{en ? "Scope and price are agreed before work starts." : "Le périmètre et le prix sont définis avant le démarrage."}</p></div></div>
+            <div class="contact-point"><span class="contact-point-icon">03</span><div><strong>{en ? "No commitment at this stage" : "Sans engagement à ce stade"}</strong><p>{en ? "Sending a request simply starts the conversation." : "Envoyer une demande permet simplement de commencer l’échange."}</p></div></div>
+          </div>
+
+          <div class="contact-mini-card">
+            <span class="contact-mini-dot"></span>
+            <div>
+              <strong>{en ? "Business websites from €790 excl. VAT" : "Sites vitrines à partir de 790 € HTVA"}</strong>
+              <p>{en ? "E-commerce and automation projects on request." : "E-commerce et automatisations sur mesure sur devis."}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-card">
+          <div class="contact-form-heading">
+            <span>{en ? "Project enquiry" : "Demande de projet"}</span>
+            <h3>{en ? "Tell us about your business." : "Parlez-nous de votre activité."}</h3>
+            <p>{en ? "A few details are enough to get started." : "Quelques informations suffisent pour commencer."}</p>
+          </div>
+
+          <form
+            name="demande-projet"
+            method="POST"
+            action={thankYouUrl}
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            class="contact-form"
+          >
+            <input type="hidden" name="form-name" value="demande-projet" />
+
+            <p class="hidden-field">
+              <label>{en ? "Do not fill in:" : "Ne pas remplir :"} <input name="bot-field" /></label>
+            </p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for={`name-${lang}`}>{en ? "Name *" : "Nom *"}</label>
+                <input id={`name-${lang}`} type="text" name="name" placeholder={en ? "John Smith" : "Jean Dupont"} autocomplete="name" required />
+              </div>
+              <div class="form-group">
+                <label for={`company-${lang}`}>{en ? "Company" : "Entreprise"}</label>
+                <input id={`company-${lang}`} type="text" name="company" placeholder={en ? "Your company" : "Votre entreprise"} autocomplete="organization" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for={`email-${lang}`}>Email *</label>
+                <input id={`email-${lang}`} type="email" name="email" placeholder={en ? "you@company.com" : "vous@entreprise.be"} autocomplete="email" required />
+              </div>
+              <div class="form-group">
+                <label for={`phone-${lang}`}>{en ? "Phone" : "Téléphone"}</label>
+                <input id={`phone-${lang}`} type="tel" name="phone" placeholder="+32 ..." autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for={`project-type-${lang}`}>{en ? "Project type *" : "Type de projet *"}</label>
+              <div class="select-wrapper">
+                <select id={`project-type-${lang}`} name="project-type" required>
+                  <option value="">{en ? "Select an option" : "Choisir une option"}</option>
+                  <option value="site-vitrine">{en ? "Business website" : "Site vitrine"}</option>
+                  <option value="ecommerce">E-commerce</option>
+                  <option value="automatisation">{en ? "Business automation" : "Projet d’automatisation"}</option>
+                  <option value="refonte">{en ? "Existing website redesign" : "Refonte d’un site existant"}</option>
+                  <option value="evolution">{en ? "New feature / website update" : "Évolution / nouvelle fonctionnalité"}</option>
+                  <option value="autre">{en ? "Other project" : "Autre projet"}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for={`message-${lang}`}>{en ? "Tell us about your project *" : "Parlez-nous de votre projet *"}</label>
+              <textarea
+                id={`message-${lang}`}
+                name="message"
+                rows="6"
+                placeholder={en ? "Briefly describe your business, what you want to improve and any tools or ideas already involved..." : "Décrivez brièvement votre activité, ce que vous souhaitez améliorer et les outils ou idées déjà concernés..."}
+                required
+              ></textarea>
+            </div>
+
+            <label class="form-consent">
+              <input type="checkbox" name="privacy-acknowledgement" value="yes" required />
+              <span>
+                {en ? "I have read the " : "J’ai pris connaissance de la "}
+                <a href={privacyUrl} target="_blank">{en ? "privacy policy" : "politique de confidentialité"}</a>.
+              </span>
+            </label>
+
+            <button type="submit" class="button contact-submit">
+              {en ? "Send my enquiry" : "Envoyer ma demande"} <span class="button-arrow">→</span>
+            </button>
+
+            <p class="form-note">{en ? "No payment or commitment at this stage." : "Aucun paiement ni engagement à ce stade."}</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-content v2-footer">
+    <a href={homeUrl} class="footer-brand"><span>AVARA</span><small>by BLUVA</small></a>
+    <p>{en ? "Web development & business automation · Charleroi, Wallonia." : "Création de sites web & automatisation métier · Charleroi, Wallonie."}</p>
+    <div class="footer-links">
+      <a href={legalUrl}>{en ? "Legal notice" : "Mentions légales"}</a>
+      <a href={privacyUrl}>{en ? "Privacy" : "Confidentialité"}</a>
+    </div>
+  </div>
+</footer>
